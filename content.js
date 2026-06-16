@@ -20,6 +20,9 @@
         `Role: ${role}.\nTask: ${task}.\nConstraint: ${constraint}.`
     };
 
+    let observerTimeout = null;
+    const injectedTextareas = new WeakSet();
+
     function inferRole(text) {
       if (text.match(/python|django|flask/i)) return 'Senior Python Developer';
       if (text.match(/react|vue|angular|typescript/i)) return 'Senior Frontend Developer';
@@ -63,10 +66,19 @@
         
         textareas.forEach((textarea) => {
           try {
-            if (!textarea || textarea.closest('.pe-injected')) return;
+            if (!textarea) return;
+            
+            // Skip if already injected
+            if (injectedTextareas.has(textarea)) return;
+            if (textarea.nextElementSibling && textarea.nextElementSibling.classList.contains('pe-button-container')) return;
+            
+            injectedTextareas.add(textarea);
             
             const container = document.createElement('div');
-            container.className = 'pe-injected pe-button-container';
+            container.className = 'pe-button-container';
+            container.style.display = 'inline-block';
+            container.style.marginLeft = '8px';
+            container.style.marginTop = '4px';
             
             const btn = document.createElement('button');
             btn.className = 'pe-enhance-btn';
@@ -225,12 +237,16 @@
       injectButton();
     }
     
+    // Debounced observer to prevent infinite loops
     const observer = new MutationObserver(() => {
-      try {
-        injectButton();
-      } catch (e) {
-        console.error('PromptEnhance: Error in observer', e);
-      }
+      if (observerTimeout) clearTimeout(observerTimeout);
+      observerTimeout = setTimeout(() => {
+        try {
+          injectButton();
+        } catch (e) {
+          console.error('PromptEnhance: Error in observer', e);
+        }
+      }, 500); // Wait 500ms after DOM changes stop
     });
     
     if (document.body) {
