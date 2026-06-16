@@ -16,6 +16,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  z-index: 999998;
+  position: relative;
 }
 
 .pe-enhance-btn:hover {
@@ -36,11 +38,12 @@
   background: white;
   border-radius: 12px;
   box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
-  z-index: 999999;
+  z-index: 2147483647;
   width: 90%;
   max-width: 500px;
   padding: 24px;
   animation: pe-slide-in 0.3s ease;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
 }
 
 @keyframes pe-slide-in {
@@ -177,6 +180,17 @@
   transform: translateY(0);
 }
 
+.pe-popup-footer {
+  margin-top: 16px;
+  padding-top: 12px;
+  border-top: 1px solid #e0e0e0;
+  font-size: 11px;
+  color: #999;
+  text-align: center;
+  letter-spacing: 0.5px;
+  font-weight: 500;
+}
+
 .pe-notification {
   position: fixed;
   bottom: 20px;
@@ -185,8 +199,9 @@
   border-radius: 6px;
   font-size: 14px;
   font-weight: 500;
-  z-index: 9999999;
+  z-index: 2147483647;
   animation: pe-fade-in 0.3s ease;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
 }
 
 @keyframes pe-fade-in {
