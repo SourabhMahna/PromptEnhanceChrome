@@ -247,6 +247,7 @@
           console.error('PromptEnhance: Error in observer', e);
         }
       }, 500); // Wait 500ms after DOM changes stop
+
     });
     
     if (document.body) {
