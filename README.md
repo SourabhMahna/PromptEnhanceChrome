@@ -42,3 +42,15 @@ Simply click the ✨ button in any textarea.
 ## 📄 License
 
 MIT License
+
+## AI Development Context
+
+Before making changes, read:
+
+/docs/AI_RULES.md
+
+This project maintains:
+- requirements history
+- architecture decisions
+- feature specifications
+- test examples
